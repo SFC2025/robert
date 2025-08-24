@@ -1,0 +1,44 @@
+# Despliegue en Render: servicio web + Postgres externo
+services:
+  - type: web
+    name: bolidos-rifas-api
+    env: node
+    region: oregon
+    plan: starter
+    buildCommand: "npm ci"
+    startCommand: "node server.js"
+    envVars:
+      - key: NODE_VERSION
+        value: 18
+      - key: DATABASE_URL
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: FRONTEND_ORIGIN
+        sync: false
+      - key: SMTP_HOST
+        sync: false
+      - key: SMTP_PORT
+        sync: false
+      - key: SMTP_USER
+        sync: false
+      - key: SMTP_PASS
+        sync: false
+      - key: SMTP_FROM
+        sync: false
+      - key: CLOUDINARY_CLOUD_NAME
+        sync: false
+      - key: CLOUDINARY_API_KEY
+        sync: false
+      - key: CLOUDINARY_API_SECRET
+        sync: false
+      - key: RECAPTCHA_SECRET
+        sync: false
+      - key: ADMIN_EMAIL
+        sync: false
+      - key: ADMIN_PASSWORD
+        sync: false
+      - key: ASSIGN_MODE
+        sync: false
+      - key: TOTAL_TICKETS
+        sync: false

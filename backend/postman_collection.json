@@ -1,0 +1,79 @@
+
+{
+  "info": {
+    "name": "Bolidos Rifas API",
+    "_postman_id": "a1111111-b222-4333-c444-555555555555",
+    "description": "Colección básica para probar login, purchase, verify y confirm.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health",
+      "request": { "method": "GET", "url": "{{base}}/health" }
+    },
+    {
+      "name": "Login",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\":\"{{admin_email}}\",\n  \"password\":\"{{admin_password}}\"\n}"
+        },
+        "url": "{{base}}/api/auth/login"
+      }
+    },
+    {
+      "name": "Purchase",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            { "key": "full_name", "value": "Juan Perez", "type": "text" },
+            { "key": "document", "value": "V12345678", "type": "text" },
+            { "key": "country_code", "value": "+58", "type": "text" },
+            { "key": "phone", "value": "04121234567", "type": "text" },
+            { "key": "qty", "value": "1", "type": "text" },
+            { "key": "price", "value": "10", "type": "text" },
+            { "key": "receipt", "src": [], "type": "file" }
+          ]
+        },
+        "url": "{{base}}/api/purchase"
+      }
+    },
+    {
+      "name": "Verify by phone",
+      "request": {
+        "method": "GET",
+        "url": "{{base}}/api/verify?phone=04121234567"
+      }
+    },
+    {
+      "name": "Admin Confirm",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Authorization", "value": "Bearer {{token}}" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"purchase_id\": 1,\n  \"status\":\"approved\"\n}"
+        },
+        "url": "{{base}}/api/admin/confirm"
+      }
+    },
+    {
+      "name": "Stats",
+      "request": { "method": "GET", "url": "{{base}}/api/stats" }
+    }
+  ],
+  "variable": [
+    { "key": "base", "value": "http://localhost:10000" },
+    { "key": "admin_email", "value": "admin@bolidos.local" },
+    { "key": "admin_password", "value": "cambialo-ya" },
+    { "key": "token", "value": "" }
+  ]
+}
